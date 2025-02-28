@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url(./assets/fonts/font.css);
+/* global css start */
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI';
+  font-size: 16px;
+  line-height: normal;
+  font-weight: normal;
+  transition: all 0.3s ease-in-out;
+  background: #000;
+  color: #fff;
+}
+body.dark {
+  background: #000;
+  color: #fff;
+}
+body.light {
+  background: #fff;
+  color: #000;
+}
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+body::-webkit-scrollbar-track {
+  background: linear-gradient(180deg,
+      rgba(2, 2, 1, 0.1) 0%,
+      rgba(16, 17, 14, 0.1) 100%);
+  box-shadow: 0px 4px 10px 0px rgba(255, 255, 255, 0.1) inset;
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--Gradient-5,
+      linear-gradient(180deg, #FC0  0%, #FC0  100%));
+  outline: 0.5px solid #000;
+  border-radius: 30px;
+}
+body.light::-webkit-scrollbar-thumb {
+  background: var(--Gradient-5,
+      linear-gradient(180deg, #f1f1f1  0%, #f1f1f1  100%));
+  outline: 0.5px solid #c4c4c4;
+  border-radius: 30px;
+}
+h1, h2, h3, h4, h5, h6, p, a, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+ul, ol {
+  list-style-type: none;
+}
+a,
+span {
+  display: inline-block;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+/* global css end */
+.btn-wrp a {
+  justify-content: space-between !important;
+}
