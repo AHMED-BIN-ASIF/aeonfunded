@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
 import Star from "../assets/icons/star.svg";
 import Cube from "../assets/images/cube.webp";
 import Texture from "../assets/images/texture.svg";
 import TextureBlack from "../assets/images/texture-black.svg";
 import BannerGradient from "../assets/images/banner-gradient.svg";
-import { Link } from "react-router-dom";
 import Eyebrow from "../ui/Eyebrow";
+import Button from "../ui/Button";
 
 const Banner = ({ mode }) => {
+  const cubeRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    gsap.to(cubeRef.current, {
+      y: "-20px",
+      repeat: -1,
+      yoyo: true,
+      duration: 2,
+      ease: "power1.inOut",
+    });
+  }, []);
+
   return (
     <section
-      className="relative pt-[100px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden"
+      className="relative pt-[100px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden max-md:pt-12"
       style={{
         background:
           mode === "dark"
@@ -21,50 +35,55 @@ const Banner = ({ mode }) => {
     >
       <div className="container max-w-[1642px] relative z-[3]">
         <div className="grid grid-cols-2 items-center gap-10 max-xl:gap-7 max-lg:grid-cols-1">
-          <div className="flex flex-col items-start">
+          <motion.div
+            ref={contentRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="flex flex-col items-start"
+          >
             <Eyebrow
               imageSrc={Star}
               text="Rated 10/10 From 800+ Users"
               theme={`${mode === "dark" ? "golden" : "light"}`}
             />
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            <h1
               className={`text-[80px] font-semibold leading-[1.12] tracking-[-1.6px] max-xl:text-[56px] max-lg:text-4xl ${
                 mode === "dark" ? "text-white" : "text-dark1f"
               }`}
             >
-              Launch Your{" "}
+              Launch Your
+              {" "}
               <span className={mode === "dark" ? "text-primary" : "text-black"}>
                 Success
-              </span>{" "}
+              </span>
+              {" "}
               with Our Capital
-            </motion.h1>
-            <p
+            </h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
               className={`text-base m-[16px_0_32px] max-w-[513px] ${
                 mode === "dark" ? "text-ivoryTint" : "text-dark1f"
               }`}
             >
               Trade with our capital, keep up to 95% of the profits, and
               maximize your earnings with zero risk to your funds!
-            </p>
-            <Link
-              to="http://trading.aeonfunded.com"
-              className={`btn text-[16px] font-inter font-medium leading-none rounded-[100px] h-10 px-8 py-4 flex items-center justify-center ${
-                mode === "dark"
-                  ? "bg-white shadow-nav-shadow text-black"
-                  : " bg-black text-white"
-              }`}
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
             >
-              Get Funded
-            </Link>
-          </div>
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          >
+              <Button
+                to="http://trading.aeonfunded.com"
+                text="Get Funded"
+                mode={mode}
+              />
+            </motion.div>
+          </motion.div>
+          <div ref={cubeRef}>
             <img
               src={Cube}
               alt="cube-img"
@@ -73,7 +92,7 @@ const Banner = ({ mode }) => {
                 mode === "dark" ? "" : "filter grayscale"
               }`}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="absolute inset-0 w-full h-full">

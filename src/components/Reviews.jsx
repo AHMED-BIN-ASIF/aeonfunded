@@ -12,9 +12,9 @@ const reviewCards = [
   {
     img: John,
     description: "They not only delivered a top-notch website but also provided strategic insights that helped us improve our overall digital presence.",
-    name: "Alice Johnson",
-    designation: "Marketing Director",
-    company: "Bright Future Tech",
+    name: "John Smith",
+    designation: "CEO",
+    company: "Innovate Solutions",
     stars: 5,
   },
   {
@@ -37,7 +37,7 @@ const reviewCards = [
     img: John,
     description: "We were impressed by their innovative approach and ability to deliver beyond expectations every time.",
     name: "David Wilson",
-    designation: "Product Manager",
+    designation: "Manager",
     company: "Streamline Inc.",
     stars: 4,
   },
@@ -45,7 +45,7 @@ const reviewCards = [
     img: John,
     description: "Their team’s creativity and strategic input were invaluable in refining our digital presence and outreach.",
     name: "Sophia Martinez",
-    designation: "Creative Director",
+    designation: "Director",
     company: "Visionary Designs",
     stars: 5,
   },
@@ -66,7 +66,7 @@ const sliderSettings = {
   slidesToScroll: 1,
   infinite: true,
   autoplay: true,
-  speed: 5000,
+  speed: 7000,
   autoplaySpeed: 0,
   cssEase: "linear",
   arrows: false,
@@ -184,7 +184,7 @@ const ReviewCard = ({ card, mode }) => {
             "{card.description}"
           </p>
           <div className="pt-5 mt-5 border-t border-solid border-[rgba(255,255,255,0.10)]">
-            <div className={`flex gap-2 text-base font-inter font-semibold ${mode === "dark" ? "text-white" : "text-dark1f"}`}>
+            <div className={`flex gap-2 text-base font-inter font-semibold max-xl:text-sm ${mode === "dark" ? "text-white" : "text-dark1f"}`}>
               <span>{card.name}</span> • <span className="font-medium">{card.designation}</span>
             </div>
           </div>

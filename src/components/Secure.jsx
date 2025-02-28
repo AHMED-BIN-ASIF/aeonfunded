@@ -11,54 +11,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Secure = ({ mode }) => {
   useEffect(() => {
-    const setupAnimations = () => {
-      const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-
-      if (isDesktop) {
-        document.querySelectorAll(".secure-card").forEach((card, index) => {
-          gsap.fromTo(
-            card,
-            {
-              opacity: 0,
-              y: 50,
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      gsap.utils.toArray(".secure-card").forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            rotate: index % 2 === 0 ? -30 : 30,
+            opacity: 0,
+            x: index % 2 === 0 ? -150 : 150,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotate: 0,
+            duration: 2,
+            // ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 70%",
+              end: "top 40%",
+              scrub: false,
+              // toggleActions: "play none none none",
             },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1.2,
-              delay: index * 0.2,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 80%",
-                end: "top 50%",
-                scrub: true,
-              },
-            }
-          );
-        });
-
-        ScrollTrigger.refresh();
-      } else {
-        document.querySelectorAll(".secure-card").forEach((card) => {
-          gsap.set(card, { opacity: 1, y: 0 });
-        });
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      }
-    };
-
-    setupAnimations();
-    window.addEventListener("resize", setupAnimations);
-
-    return () => {
-      window.removeEventListener("resize", setupAnimations);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+          }
+        );
+      });
+    }
   }, []);
 
   return (
     <section
-      className="py-[120px] bg-cover bg-no-repeat bg-center max-xl:py-20 max-md:py-10"
+      className="py-[120px] bg-cover bg-no-repeat bg-center max-xl:py-20 max-md:py-10 overflow-hidden"
       style={{
         background:
           mode === "dark"
@@ -84,8 +68,6 @@ const Secure = ({ mode }) => {
                 The total amount of money paid out to traders over time, showcasing overall earnings.
               </p>
               <img src={Verified} alt="Verified payout guarantee badge" className={`mx-auto h-auto ${mode === "dark" ? "" : "filter grayscale"}`} />
-              <div className={`absolute top-[-1px] right-0 left-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
-                <div className={`absolute bottom-[-1px] left-0 right-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
             </div>
           </div>
           <div className={`secure-card p-[10px] rounded-[24px] border border-[rgba(255,255,255,0.06)] shadow-card-inset ${mode === "dark" ? "bg-black" : "bg-[#F1F1F1]"}`}>
@@ -95,8 +77,6 @@ const Secure = ({ mode }) => {
                 The total amount of money paid out to traders over time, showcasing overall earnings.
               </p>
               <img src={Payouts} alt="Illustration of secure payouts" className={`mx-auto h-auto ${mode === "dark" ? "" : "filter grayscale invert"}`} />
-              <div className={`absolute top-[-1px] right-0 left-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
-                <div className={`absolute bottom-[-1px] left-0 right-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
             </div>
           </div>
         </div>

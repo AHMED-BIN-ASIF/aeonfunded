@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import CountUp from "react-countup";
 import Eyebrow from "../ui/Eyebrow";
 import SccessBg from "../assets/images/success-bg.webp";
 import Payout from "../assets/images/payout-chart.svg";
 import PaidChart from "../assets/images/bar-chart.svg";
 import World from "../assets/images/world.svg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const successData = [
   {
@@ -46,9 +51,38 @@ const successData = [
 ];
 
 const Success = ({mode}) => {
+  useEffect(() => {
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      gsap.utils.toArray(".success-card").forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            rotate: index  === 0 ? -20 : 0,
+            opacity: 0,
+            x: index === 0 ? -150 : '25%',
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotate: 0,
+            duration: .5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 60%",
+              end: "top 20%",
+              scrub: false,
+              // toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }
+  }, []);
   return (
     <section
-      className="py-[120px] max-xl:py-[80px]  max-md:py-10"
+      className="py-[120px] max-xl:py-[80px] overflow-hidden max-md:py-10"
       style={{
         background: mode === "dark"
           ? `url(${SccessBg}) no-repeat center / cover`
@@ -81,7 +115,7 @@ const Success = ({mode}) => {
 };
 const SuccessCard = ({eybrowText, title, suffix, prefix, bodyClass, description, extraInfo, image, spanClass, imageClass, layoutClass, mode }) => {
     return (
-      <div className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset hover:shadow-[#4f503f]
+      <div className={`success-card p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset hover:shadow-[#4f503f]
       transition-all duration-500 ease-in-out ${spanClass || ''}
        ${mode==='dark' ? 'bg-black' : 'bg-[#F1F1F1]'}
       `}>
