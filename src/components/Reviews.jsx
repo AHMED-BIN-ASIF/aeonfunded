@@ -94,7 +94,7 @@ const Reviews = ({ mode }) => {
           <div className="hidden lg:grid grid-cols-3 gap-6">
             {/* 1st slider */}
             <Slider {...sliderSettings}>
-              {reviewCards.slice(0, 3).map((card, index) => (
+              {reviewCards.slice(0, 4).map((card, index) => (
                 <ReviewCard key={index} card={card} mode={mode} />
               ))}
             </Slider>
@@ -102,9 +102,9 @@ const Reviews = ({ mode }) => {
             {/* 2nd slider (Reversed & Rotated) */}
             <div className="rotate-180">
               <Slider {...sliderSettings}>
-                {reviewCards.slice(3, 6).reverse().map((card, index) => (
-                  <div className="rotate-180">
-                    <ReviewCard key={index} card={card} mode={mode} />
+                {reviewCards.slice(2, 6).reverse().map((card, index) => (
+                  <div key={index} className="rotate-180">
+                    <ReviewCard card={card} mode={mode} />
                   </div>
                 ))}
               </Slider>
@@ -112,7 +112,7 @@ const Reviews = ({ mode }) => {
 
             {/* 3rd slider */}
             <Slider {...sliderSettings}>
-              {reviewCards.slice(0, 3).map((card, index) => (
+              {reviewCards.slice(0, 4).map((card, index) => (
                 <ReviewCard key={index} card={card} mode={mode} />
               ))}
             </Slider>
@@ -130,9 +130,9 @@ const Reviews = ({ mode }) => {
             {/* Rotated slider */}
             <div className="rotate-180">
               <Slider {...sliderSettings}>
-                {reviewCards.reverse().map((card, index) => (
-                  <div className="rotate-180">
-                    <ReviewCard key={index} card={card} mode={mode} />
+                {reviewCards.slice().reverse().map((card, index) => (
+                  <div key={index} className="rotate-180">
+                    <ReviewCard card={card} mode={mode} />
                   </div>
                 ))}
               </Slider>
@@ -171,11 +171,7 @@ const ReviewCard = ({ card, mode }) => {
         max-xl:p-5 ${mode === "dark" ? "bg-review-card" : "bg-white"}`}
       >
         <div>
-          <div className={`rounded-full w-[50px] h-[50px] overflow-hidden 
-            ${mode === "dark" ? "shadow-[2px_4px_24px_0px_rgba(255,204,0,0.30)]" : "shadow-[2px_4px_24px_0px_rgba(31,31,31,0.20)]"}`}>
-            <img src={card.img} alt={card.name} className="w-full h-full object-cover" />
-          </div>
-          <div className="flex gap-[6px] mt-[22px] mb-5">
+          <div className="flex gap-[6px] mb-5">
             {[...Array(card.stars)].map((_, i) => (
               <img key={i} src={Star} alt="star" loading="lazy" className="w-5 h-5" />
             ))}
@@ -184,16 +180,13 @@ const ReviewCard = ({ card, mode }) => {
             "{card.description}"
           </p>
           <div className="pt-5 mt-5 border-t border-solid border-[rgba(255,255,255,0.10)]">
-            <div className={`flex gap-2 text-base font-inter font-semibold ${mode === "dark" ? "text-white" : "text-dark1f"}`}>
-              <span>{card.name}</span> • <span className="font-medium">{card.designation}</span>
-            </div>
+            <span className={`font-inter text-base leading-relaxed ${mode === "dark" ? "text-ivoryTint" : "text-dark1f opacity-80"}`}>
+              {card.company}
+            </span>
           </div>
-          <span className={`font-inter text-base leading-relaxed ${mode === "dark" ? "text-ivoryTint" : "text-dark1f opacity-80"}`}>
-            {card.company}
-          </span>
         </div>
         <div className={`absolute top-[-1px] right-0 left-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
-                <div className={`absolute bottom-[-1px] left-0 right-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
+        <div className={`absolute bottom-[-1px] left-0 right-0 mx-auto w-[60%] h-[1px] bg-card-line ${mode==='dark'?'':'opacity-0'}`}></div>
       </div>
     </div>
   );
