@@ -53,7 +53,7 @@ const Header = ({mode}) => {
           </button>
           {/* Main Navigation */}
             <nav className={`
-            ${mode === 'dark'?"max-lg:bg-black shadow-nav-shadow":"bg-[#fff]"}
+            ${mode === 'dark'?"max-lg:bg-black shadow-nav-shadow":"max-lg:bg-[#e5e7eb] "}
             max-w-[666px] rounded-[100px] p-[17px_30px] bg-[rgba(18,18,18,0.10)]
             max-xl:max-w-[580px] max-xl:p-[14px_24px] max-lg:overflow-hidden 
             max-lg:absolute top-[80px]  left-0 right-0 max-lg:max-w-full max-lg:w-[90%] max-lg:mx-auto
@@ -66,7 +66,7 @@ const Header = ({mode}) => {
                   <li key={index}>
                     <Link
                       to={item.path}
-                      className={`text-sm xl:text-base leading-normal font-normal font-inter ${mode=== 'dark'? 'text-white': 'text-dark1f'}`}
+                      className={`text-sm xl:text-base leading-normal font-normal font-inter transition-all duration-300 ease-in-out ${mode=== 'dark'? 'text-white hover:text-primary': 'text-dark1f'}`}
                       onClick={() => setMenuOpen(false)}
                     >
                       {item.name}
@@ -78,15 +78,15 @@ const Header = ({mode}) => {
             <Link
                   to="http://trading.aeonfunded.com"
                   className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center
-                  ${mode=== 'dark'? 'bg-[#FFD221]  text-black shadow-nav-shadow': 'bg-black text-white'}`}
+                  ${mode=== 'dark'? 'bg-[#FFD221]  text-black shadow-nav-shadow hover:bg-white hover:text-black': 'bg-black text-white hover:bg-primary hover:text-black'}`}
                 >
                   Get Funded
                 </Link>
             <Link
                   to="http://trading.aeonfunded.com"
-                  className={`btn font-inter font-medium leading-none rounded-[100px] 
+                  className={`btn font-inter font-medium leading-none rounded-[100px] transition-all duration-300 ease-in-out
                    h-10 px-5 py-4 flex items-center justify-center
-                   ${mode=== 'dark'? 'bg-[rgba(255,255,255,0.10)] text-white  shadow-nav-shadow': 'text-black'}
+                   ${mode=== 'dark'? 'bg-[rgba(255,255,255,0.10)] text-white  shadow-nav-shadow hover:bg-white hover:text-black': 'text-black hover:bg-dark1f hover:text-white'}
                    `}
                 >
                   Log In
@@ -96,15 +96,15 @@ const Header = ({mode}) => {
             <div className="hidden lg:flex flex-col lg:flex-row items-center gap-[14px] ">
             <Link
                   to="http://trading.aeonfunded.com"
-                  className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center
-                  ${mode=== 'dark'? 'bg-[#FFD221]  text-black shadow-nav-shadow': 'bg-black text-white'}`}
+                  className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center transition-all duration-300 ease-in-out
+                  ${mode=== 'dark'? 'bg-[#FFD221]  text-black shadow-nav-shadow hover:bg-white hover:text-black': 'bg-black text-white hover:bg-primary hover:text-black'}`}
                 >
                   Get Funded
                 </Link>
             <Link
                   to="http://trading.aeonfunded.com"
-                  className={`btn font-inter font-medium leading-none rounded-[100px]  h-10 px-5 py-4 flex items-center justify-center
-                    ${mode=== 'dark'? 'bg-[rgba(255,255,255,0.10)] text-white  shadow-nav-shadow': 'text-black'}`}
+                  className={`btn font-inter font-medium leading-none rounded-[100px]  h-10 px-5 py-4 flex items-center justify-center transition-all duration-300 ease-in-out
+                    ${mode=== 'dark'? 'bg-[rgba(255,255,255,0.10)] text-white  shadow-nav-shadow hover:bg-white hover:text-black': 'text-black hover:bg-dark1f hover:text-white'}`}
                 >
                   Log In
                 </Link>

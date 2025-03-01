@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Eyebrow from "../ui/Eyebrow";
 import Emily from "../assets/images/emily.png";
 import CountUp from "react-countup";
@@ -6,6 +7,16 @@ import Check from "../assets/icons/check-circle.svg";
 import ArrowRight from "../assets/icons/arrow-right.svg";
 import Trophy from "../assets/icons/trophy.svg";
 import Button from "../ui/Button";
+
+// Variant for each referral card
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: { 
+    scale: 1, 
+    opacity: 1,
+    transition: { type: "spring", stiffness: 260, damping: 20 }
+  },
+};
 
 const Refferals = ({ mode }) => {
   const refferData = [
@@ -51,6 +62,7 @@ const Refferals = ({ mode }) => {
     { title: "Unique Earnings", count: 7200, prefix: "$" },
   ];
 
+
   return (
     <section
       className="py-[120px] max-xl:pt-36 max-xl:pb-20 max-md:py-10"
@@ -84,7 +96,10 @@ const Refferals = ({ mode }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-6 my-6">
+        {/* Referral cards container with staggered animation using inView */}
+        <div
+          className="grid grid-cols-3 gap-6 my-6"
+        >
           {refferData.map((item, index) => (
             <RefferCard key={index} data={item} mode={mode} />
           ))}
@@ -126,7 +141,7 @@ const Refferals = ({ mode }) => {
               </div>
               <div className="relative h-8 flex items-center justify-center gap-2 rounded-[100px] py-2.5 px-4 mb-4 border border-solid max-w-max bg-black shadow-nav-shadow border-[rgba(255,255,255,0.20)]">
                 <span className="text-sm font-inter text-[#ECECFB]">
-                Rising Star
+                  Rising Star
                 </span>
                 <div
                   className="absolute inset-[-1px_0_auto] mx-auto h-[1px] w-[60%] z-1"
@@ -147,113 +162,140 @@ const Refferals = ({ mode }) => {
 };
 
 const RefferCard = ({ data, mode }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
   return (
-    <div
-      className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset ${
-        mode === "dark" ? "bg-black" : "bg-[#F1F1F1]"
-      }`}
+    <motion.div
+      ref={ref}
+      variants={cardVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
     >
       <div
-        className={`relative h-full font-inter p-6 rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col ${
-          mode === "dark" ? "bg-tier" : "bg-white"
+        className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset ${
+          mode === "dark" ? "bg-black" : "bg-[#F1F1F1]"
         }`}
-        style={{ backdropFilter: "blur(7.5px)" }}
       >
-        <div className="flex justify-between items-center gap-3">
-          <div
-            className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px] ${
-              mode === "dark"
-                ? "bg-[rgba(255,204,0,0.04)] shadow-icon-border"
-                : "bg-[rgba(31,31,31,0.04)] shadow-icon-light"
-            }`}
-          >
-            <img
-              src={data.icon}
-              alt="icon"
-              loading="lazy"
-              className={`${mode === "dark" ? "" : "filter invert"}`}
-            />
-          </div>
-          <div className="flex gap-2.5">
-            {data.challenge && (
-              <span
-                className={`text-[10px] font-inter relative h-7 max-w-max flex items-center justify-center gap-2 rounded-[100px] py-2 px-[10px] border border-solid ${
-                  mode === "dark"
-                    ? "border-[rgba(255,204,0,0.10)] bg-[rgba(255,204,0,0.10)] text-primary shadow-[0px_4px_10px_0px_rgba(0,0,0,0.00)_inset]"
-                    : "text-dark1f border-[rgba(31,31,31,0.10)] bg-[rgba(31,31,31,0.10)]"
-                }`}
-              >
-                {data.challenge}
-              </span>
-            )}
-
-            <span
-              className={`text-[10px] font-inter relative h-7 max-w-max flex items-center justify-center gap-2 rounded-[100px] py-2 px-[10px] border border-solid border-[rgba(255,255,255,0.20)] ${
+        <div
+          className={`relative h-full font-inter p-6 rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col ${
+            mode === "dark" ? "bg-tier" : "bg-white"
+          }`}
+          style={{ backdropFilter: "blur(7.5px)" }}
+        >
+          <div className="flex justify-between items-center gap-3">
+            <div
+              className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px] ${
                 mode === "dark"
-                  ? "text-ivoryTint bg-[rgba(255,255,255,0.01)] shadow-nav-shadow"
-                  : "text-dark1f bg-[#F1F1F1]"
+                  ? "bg-[rgba(255,204,0,0.04)] shadow-icon-border"
+                  : "bg-[rgba(31,31,31,0.04)] shadow-icon-light"
               }`}
             >
-              {data.tier}
-            </span>
-          </div>
-        </div>
-        {data.features.map((feature, index) => (
-          <div
-            key={index}
-            className="py-5 border-b border-dashed border-[rgba(226,234,253,0.10)]"
-          >
-            <div className="flex items-center gap-[10px]">
               <img
-                src={Check}
-                alt="check"
+                src={data.icon}
+                alt="icon"
                 loading="lazy"
-                className={`w-6 h-6 ${
-                  mode === "dark" ? "" : "filter grayscale invert"
-                }`}
+                className={`${mode === "dark" ? "" : "filter invert"}`}
               />
-              <span className="text-sm leading-none">{feature}</span>
+            </div>
+            <div className="flex gap-2.5">
+              {data.challenge && (
+                <span
+                  className={`text-[10px] font-inter relative h-7 max-w-max flex items-center justify-center gap-2 rounded-[100px] py-2 px-[10px] border border-solid ${
+                    mode === "dark"
+                      ? "border-[rgba(255,204,0,0.10)] bg-[rgba(255,204,0,0.10)] text-primary shadow-[0px_4px_10px_0px_rgba(0,0,0,0.00)_inset]"
+                      : "text-dark1f border-[rgba(31,31,31,0.10)] bg-[rgba(31,31,31,0.10)]"
+                  }`}
+                >
+                  {data.challenge}
+                </span>
+              )}
+
+              <span
+                className={`text-[10px] font-inter relative h-7 max-w-max flex items-center justify-center gap-2 rounded-[100px] py-2 px-[10px] border border-solid border-[rgba(255,255,255,0.20)] ${
+                  mode === "dark"
+                    ? "text-ivoryTint bg-[rgba(255,255,255,0.01)] shadow-nav-shadow"
+                    : "text-dark1f bg-[#F1F1F1]"
+                }`}
+              >
+                {data.tier}
+              </span>
             </div>
           </div>
-        ))}
-        <div className="mt-5 btn-wrp">
-          <Button
-            to="/"
-            text="Learn More"
-            variant="gold"
-            size="small"
-            hasIcon={true}
-            icon={ArrowRight}
-            mode={mode}
-          />
+          {data.features.map((feature, index) => (
+            <div
+              key={index}
+              className="py-5 border-b border-dashed border-[rgba(226,234,253,0.10)]"
+            >
+              <div className="flex items-center gap-[10px]">
+                <img
+                  src={Check}
+                  alt="check"
+                  loading="lazy"
+                  className={`w-6 h-6 ${
+                    mode === "dark" ? "" : "filter grayscale invert"
+                  }`}
+                />
+                <span className="text-sm leading-none">{feature}</span>
+              </div>
+            </div>
+          ))}
+          <div className="mt-5 btn-wrp">
+            <Button
+              to="/"
+              text="Learn More"
+              variant="gold"
+              size="small"
+              hasIcon={true}
+              icon={ArrowRight}
+              mode={mode}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
+  );
+};
+
+// A separate component for each stat item using inView
+const StatItem = ({ title, count, prefix, index, mode }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+      className={`p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
+        mode === "dark" ? "bg-[rgba(5,5,5,0.40)]" : "bg-[#F1F1F1]"
+      }`}
+    >
+      <span className="text-[28px] block mb-2.5 leading-tight font-semibold">
+        {prefix || ""}
+        <CountUp
+          end={count}
+          duration={2 + index}
+          separator=","
+          enableScrollSpy
+          scrollSpyOnce
+        />
+      </span>
+      <span
+        className={`text-sm block ${
+          mode === "dark" ? "text-ivoryTint opacity-60" : "text-dark1f"
+        }`}
+      >
+        {title}
+      </span>
+    </motion.div>
   );
 };
 
 const ReferralStats = ({ stats, mode }) => {
   return (
     <div className="grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-2.5">
-      {stats.map(({ title, count, prefix }, index) => (
-        <div
-          key={index}
-          className={`p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
-            mode === "dark" ? "bg-[rgba(5,5,5,0.40)]" : "bg-[#F1F1F1]"
-          }`}
-        >
-          <span className="text-[28px] block mb-2.5 leading-tight font-semibold">
-            {prefix || ""}
-            <CountUp end={count} duration={2 + index} separator="," />
-          </span>
-          <span
-            className={`text-sm block ${
-              mode === "dark" ? "text-ivoryTint opacity-60" : "text-dark1f"
-            }`}
-          >
-            {title}
-          </span>
-        </div>
+      {stats.map((stat, index) => (
+        <StatItem key={index} index={index} mode={mode} {...stat} />
       ))}
     </div>
   );

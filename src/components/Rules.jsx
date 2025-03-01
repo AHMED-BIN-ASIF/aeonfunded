@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "../ui/Eyebrow";
 // import AboutBg from "../assets/images/about-bg.webp";
 import ProfitTarget from "../assets/images/profit-target.svg";
@@ -7,6 +9,8 @@ import OverallDrawdown from "../assets/images/overall-drawdown.svg";
 import MinTrading from "../assets/images/min-trading.svg";
 import Infinity from "../assets/images/infinity.svg";
 import RefFee from "../assets/images/ref-fee.svg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const rulesData = [
   {
@@ -72,9 +76,38 @@ const rulesData = [
 ];
 
 const Rules = ({mode}) => {
+  useEffect(() => {
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      gsap.utils.toArray(".rule-card").forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            rotate: index % 2 === 0 ? -30 : 30,
+            opacity: 0,
+            x: index % 2 === 0 ? -150 : 150,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotate: 0,
+            duration: 2,
+            // ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 70%",
+              end: "top 40%",
+              scrub: false,
+              // toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }
+  }, []);
   return (
     <section
-      className="py-[120px] max-xl:py-[80px]  max-md:py-10"
+      className="py-[120px] max-xl:py-[80px]  max-md:py-10 overflow-hidden"
       style={{
         background: mode==='dark'
         ?"radial-gradient(150.94% 139.8% at 60.26% 151.92%, rgba(0, 0, 0, 0.00) 0%, #000 100%), linear-gradient(360deg,  rgba(0, 0, 0, 0.5) 0%, rgba(255, 204, 0, 0.5) 100%), 0px -41.5px / 100% 109.422% no-repeat"
@@ -105,7 +138,7 @@ const Rules = ({mode}) => {
 };
 const RulesCard = ({ title, suffix, prefix, bodyClass, description, extraInfo, image, spanClass, imageClass, layoutClass,mode }) => {
     return (
-      <div className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset
+      <div className={` rule-card p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset
       ${mode==='dark'?'bg-black':'bg-[#F1F1F1]'} ${spanClass || ''}`}>
         <div
           className={`relative h-full text-center rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] ${layoutClass} gap-5 items-center overflow-hidden

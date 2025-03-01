@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import Eyebrow from "../ui/Eyebrow";
-// import AboutBg from "../assets/images/about-bg.webp";
 import BenifitBg from "../assets/images/benifit-bg.svg";
 import Verified from "../assets/icons/shield-warning.png";
 import Easy from "../assets/icons/hart-arrow-up.png";
@@ -49,60 +49,103 @@ const benifitsCards = [
   },
 ];
 
-const Benifits = ({mode}) => {
+const Benifits = ({ mode }) => {
+  const cardsRef = useRef([]);
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia();
+  
+      mm.add("(min-width: 1024px)", () => { // Animation only for large screens
+        gsap.fromTo(
+          cardsRef.current,
+          { opacity: 0, scale: 0.8, y: 50 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: "top 80%", // Start animation when 80% of the section is in view
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+  
+    }, cardsRef);
+  
+    return () => ctx.revert(); // Cleanup on unmount
+  }, []);
+  
+  
   return (
     <section
       className="py-32 bg-cover bg-no-repeat bg-center max-xl:py-24"
       style={{
-        background: mode === "dark"
-          ? `url(${BenifitBg}) no-repeat center / cover`
-          : ""
+        background:
+          mode === "dark" ? `url(${BenifitBg}) no-repeat center / cover` : "",
       }}
     >
       <div className="container max-w-[1240px]">
         <div className="text-center flex items-center flex-col">
-          <Eyebrow text="Benefit"  />
-          <h2 className={`text-[50px] leading-none font-semibold tracking-[-0.5px]
-          max-lg:text-4xl ${mode==='dark' ? 'text-white': 'text-dark1f'}`}>
-          Why Traders Love <span className={`${mode==='dark' ? 'text-primary': 'text-dark1f'}`}>A</span>EON?
+          <Eyebrow text="Benefit" />
+          <h2
+            className={`text-[50px] leading-none font-semibold tracking-[-0.5px] max-lg:text-4xl ${
+              mode === "dark" ? "text-white" : "text-dark1f"
+            }`}
+          >
+            Why Traders Love <span className={`${mode === "dark" ? "text-primary" : "text-dark1f"}`}>A</span>EON?
           </h2>
-          <p className={`text-sm leading-[1.71] max-w-[350px] mx-auto mt-[10px]
-            ${mode==='dark' ? 'text-ivoryTint': 'text-dark1f opacity-80'}`}>
-          Get paid quickly and securely with a smooth and reliable payout process.
+          <p
+            className={`text-sm leading-[1.71] max-w-[350px] mx-auto mt-[10px] ${
+              mode === "dark" ? "text-ivoryTint" : "text-dark1f opacity-80"
+            }`}
+          >
+            Get paid quickly and securely with a smooth and reliable payout process.
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-6 mt-[60px]
-        max-lg:grid-cols-2 max-md:grid-cols-1">
+        <div className="grid grid-cols-3 gap-6 mt-[60px] max-lg:grid-cols-2 max-md:grid-cols-1">
           {benifitsCards.map((card, index) => (
             <div
               key={index}
-              className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset
-                ${mode==='dark'? 'bg-black ': 'bg-[#F1F1F1]'}`}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset 
+               
+                ${
+                mode === "dark" ? "bg-black " : "bg-[#F1F1F1] "
+              }`}
             >
               <div
-                className={`relative p-6 h-full rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-5 justify-between items-start
-                ${mode==='dark'? ' bg-card-gradient': 'bg-white'}`}>
+                className={`relative p-6 h-full rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-5 justify-between items-start ${
+                  mode === "dark" ? " bg-card-gradient" : "bg-white"
+                }`}
+              >
                 <div>
                   <div className="flex flex-wrap gap-4 items-center mb-4">
-                  <div className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px]
-                  ${mode==='dark'? 'shadow-icon-border bg-[rgba(255,204,0,0.04)]' : 'shadow-icon-light bg-[rgba(31,31,31,0.04)]'}`}>
-                    <img src={card.icon} alt={card.title} className={`${mode==='dark'? '': 'filter invert'}`} />
+                    <div
+                      className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px] ${
+                        mode === "dark"
+                          ? "shadow-icon-border bg-[rgba(255,204,0,0.04)]"
+                          : "shadow-icon-light bg-[rgba(31,31,31,0.04)]"
+                      }`}
+                    >
+                      <img src={card.icon} alt={card.title} className={`${mode === "dark" ? "" : "filter invert"}`} />
+                    </div>
+                    <h4 className={`text-xl leading-tight font-semibold font-inter ${mode === "dark" ? "text-white " : "text-dark1f"}`}>
+                      {card.title}
+                    </h4>
                   </div>
-                  <h4 className={`text-xl leading-tight font-semibold font-inter
-                    ${mode==='dark'?'text-white ':'text-dark1f'}`}>
-                    {card.title}
-                  </h4>
-                  </div>
-                  <span className={`text-sm leading-loose font-inter mb-1
-                  ${mode==='dark'?'text-white ':'text-dark1f'}`}>{card.shortTitle}</span>
-                  <p className={`text-xs leading-[1.7] font-inter
-                  ${mode==='dark'?'text-ivoryTint ':'text-dark1f'}`}>
+                  <span className={`text-sm leading-loose font-inter mb-1 ${mode === "dark" ? "text-white " : "text-dark1f"}`}>
+                    {card.shortTitle}
+                  </span>
+                  <p className={`text-xs leading-[1.7] font-inter ${mode === "dark" ? "text-ivoryTint " : "text-dark1f"}`}>
                     {card.description}
                   </p>
                 </div>
-                {/* card-lines */}
-                <div className={`absolute top-[-1px] right-0 left-0 w-[80%] mx-auto h-[1px] bg-card-line
-                  ${mode==='dark'? '': 'opacity-0'}`}></div>
+                <div className={`absolute top-[-1px] right-0 left-0 w-[80%] mx-auto h-[1px] bg-card-line ${mode === "dark" ? "" : "opacity-0"}`}></div>
               </div>
             </div>
           ))}

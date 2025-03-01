@@ -1,55 +1,106 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Eyebrow from "../ui/Eyebrow";
 import { Link } from "react-router-dom";
 import Check from "../assets/icons/check-circle.svg";
 import PricingBg from "../assets/images/pricing-bg.svg";
 
-const tabs = ["One phase", "Two Phase", "Plus"];
-  const Pricedata = [
-    { amount: "$5K", fee: "$49", target: "$500", maxDrawdown: "8%" },
-    { amount: "$10K", fee: "$99", target: "$1,000", maxDrawdown: "8%" },
-    { amount: "$15K", fee: "$149", target: "$1,500", maxDrawdown: "10%" },
-    { amount: "$25K", fee: "$199", target: "$2,500", maxDrawdown: "10%" },
-    { amount: "$50K", fee: "$299", target: "$5,000", maxDrawdown: "12%" },
-    { amount: "$100K", fee: "$499", target: "$10,000", maxDrawdown: "12%" },
-    { amount: "$200K", fee: "$899", target: "$20,000", maxDrawdown: "14%" },
-    { amount: "$400K", fee: "$1,499", target: "$40,000", maxDrawdown: "14%" },
-  ];
-  const planData = [
-    { icon: Check, title: "Fixed Price", value: "$2,500" , percentage: "10%" },
-    { icon: Check, title: "DrawDown add on", value: "25%" },
-    { icon: Check, title: "95% profit split add on", value: "20%" },
-    { icon: Check, title: "Refundable Fee", value: "100%" },
-  ];
-  const Btmtabs = [
-    { name: "Phase 1" },
-    { name: "Phase 2" },
-    { name: "Phase 3" },
-  ];
   const planDetailsTwo = [
-    { icon: Check, title: "Minimum Trading Days", value: "5 Days" },
-    { icon: Check, title: "Performance Split", value: "up to 90%" },
+    { icon: Check, title: "Minimum Trading Days", value: "3 Days" },
+    { icon: Check, title: "Performance Split", value: "up to 95%" },
     { icon: Check, title: "Drawdown Type", value: "Trailing" },
     { icon: Check, title: "Refund", value: "100%" },
     { icon: Check, title: "Trade Through News", value: "Yes" },
   ];
   const planDetailsThree = [
     { icon: Check, title: "Maximum Trading Days", value: "Unlimited" },
-    { icon: Check, title: "Leverage", value: "up to 50:1" },
+    { icon: Check, title: "trading leverage", value: "1:100" },
     { icon: Check, title: "EAs Allowed", value: "Yes" },
     { icon: Check, title: "Hold Over Weekend", value: "Yes" },
-    { icon: Check, title: "Platform", value: "MT4" },
+    { icon: Check, title: "Platform", value: "5" },
   ];
-const PricingPlan = ({ mode }) => {
-  const [activeTab, setActiveTab] = useState("One phase");
-  const [BtmactiveTab, setBtmActiveTab] = useState("Phase 1");
-  const [selectedTabData, setSelectedTabData] = useState("$25K");
-  const [selectedPlan, setSelectedPlan] = useState({});
-  useEffect(() => {
-    const plan = Pricedata.find((p) => p.amount === selectedTabData);
-    setSelectedPlan(plan || {});
-  }, [selectedTabData]); // No need to include Pricedata
+  
+const pricingData = {
+  "plans": {
+    "One Phase": {
+      "pricingOptions": [
+          { amount: "$5K", fee: "$49", target: "$500", maxDrawdown: "8%" },
+          { amount: "$10K", fee: "$99", target: "$1,000", maxDrawdown: "8%" },
+          { amount: "$15K", fee: "$149", target: "$1,500", maxDrawdown: "10%" },
+          { amount: "$25K", fee: "$199", target: "$2,500", maxDrawdown: "10%" },
+          { amount: "$50K", fee: "$299", target: "$5,000", maxDrawdown: "12%" },
+          { amount: "$100K", fee: "$499", target: "$10,000", maxDrawdown: "12%" },
+          { amount: "$200K", fee: "$899", target: "$20,000", maxDrawdown: "14%" },
+          { amount: "$400K", fee: "$1,499", target: "$40,000", maxDrawdown: "14%" },
+      ],
+      "description": "Two-phase, two-step challenge to test your trading skill.",
+      "addons": [
+        { icon: Check, title: "Fixed Price", value: "$2,500" , percentage: "10%" },
+        { icon: Check, title: "DrawDown add on", value: "35%" },
+        { icon: Check, title: "95% profit split add on", value: "20%" },
+        { icon: Check, title: "7 working days payout frequency add on", value: "25%" },
+        { icon: Check, title: "Reset discount Phase 1", value: "20%" },
+        { icon: Check, title: "Reset discount Phase 2", value: "None" },
+      ]
+    },
+    "Two Phase": {
+      "pricingOptions": [
+        { amount: "$5K", fee: "$50", target: "$500", maxDrawdown: "8%" },
+        { amount: "$10K", fee: "$100", target: "$1,000", maxDrawdown: "8%" },
+        { amount: "$15K", fee: "$150", target: "$1,500", maxDrawdown: "10%" },
+        { amount: "$25K", fee: "$200", target: "$2,500", maxDrawdown: "10%" },
+        { amount: "$50K", fee: "$300", target: "$5,000", maxDrawdown: "12%" },
+        { amount: "$100K", fee: "$500", target: "$10,000", maxDrawdown: "12%" },
+        { amount: "$200K", fee: "$900", target: "$20,000", maxDrawdown: "14%" },
+        { amount: "$400K", fee: "$1,500", target: "$40,000", maxDrawdown: "14%" },
+      ],
+      "description": "Traditional two-step evaluation process for experienced traders.",
+      "addons": [
+        { icon: Check, title: "Fixed Price", value: "$2,500" , percentage: "10%" },
+        { icon: Check, title: "DrawDown add on", value: "35%" },
+        { icon: Check, title: "95% profit split add on", value: "20%" },
+        { icon: Check, title: "7 working days payout frequency add on", value: "25%" },
+        { icon: Check, title: "Reset discount Phase 1", value: "20%" },
+        { icon: Check, title: "Reset discount Phase 2", value: "None" },
+      ]
+    },
+    "Plus": {
+      "pricingOptions": [
+    { "amount": "$5K", "fee": "$84", "target": "$500", "maxDrawdown": "8%" },
+    { "amount": "$10K", "fee": "$119", "target": "$1,000", "maxDrawdown": "8%" },
+    { "amount": "$15K", "fee": "$149", "target": "$1,500", "maxDrawdown": "10%" }, 
+    { "amount": "$25K", "fee": "$219", "target": "$2,500", "maxDrawdown": "10%" },
+    { "amount": "$50K", "fee": "$314", "target": "$5,000", "maxDrawdown": "12%" },
+    { "amount": "$100K", "fee": "$549", "target": "$10,000", "maxDrawdown": "12%" },
+    { "amount": "$200K", "fee": "$1,098", "target": "$20,000", "maxDrawdown": "14%" },
+    { "amount": "$400K", "fee": "$1,499", "target": "$40,000", "maxDrawdown": "14%" }
+],
+      "description": "Exclusive trading plan with higher flexibility and benefits.",
+      "addons": [
+        { icon: Check, title: "Fixed Price", value: "$2,500" , percentage: "10%" },
+        { icon: Check, title: "DrawDown add on", value: "35%" },
+        { icon: Check, title: "95% profit split add on", value: "20%" },
+        { icon: Check, title: "7 working days payout frequency add on", value: "25%" },
+        { icon: Check, title: "Reset discount Phase 1", value: "20%" },
+        { icon: Check, title: "Reset discount Phase 2", value: "None" },
+      ]
+    }
+  }
+}
 
+
+
+
+
+const PricingPlan = ({ mode }) => {
+
+  const [selectedAmount, setSelectedAmount] = useState("$5K");
+  const [activeTab, setActiveTab] = useState("One Phase");
+
+
+  const plan = pricingData.plans[activeTab];
+  const selectedPlan = plan.pricingOptions.find(option => option.amount === selectedAmount);
+
+  
   return (
     <section
       className="py-[120px] bg-cover bg-no-repeat bg-center max-xl:py-20"
@@ -80,8 +131,8 @@ const PricingPlan = ({ mode }) => {
           className="flex gap-5 mt-[60px] mb-10 justify-center
         max-md:flex-col"
         >
-           {tabs.map((tab) => (
-            <button
+        {Object.keys(pricingData.plans).map(tab => (
+          <button
             key={tab}
               className={`px-8 py-[10px] h-12 rounded-[100px] flex items-center justify-center transition-all duration-500 ease-in-out
               font-inter text-sm leading-none font-semibold max-md:w-full
@@ -98,7 +149,7 @@ const PricingPlan = ({ mode }) => {
             >
               {tab}
             </button>
-          ))}
+        ))}
         </div>
 
         <div
@@ -118,18 +169,18 @@ const PricingPlan = ({ mode }) => {
                 mode === "dark" ? "text-white" : "text-dark1f"
               }`}
             >
-              {Pricedata.map((item, index) => (
+              {plan.pricingOptions.map((item, index) => (    
                 <button
                   key={index}
                   className={`rounded-[100px] p-[10px] cursor-pointer border
                       ${
-                        selectedTabData === item.amount
+                        selectedAmount === item.amount
                           ? mode === "dark"
                             ? " border-[rgba(255,204,0,0.10)] bg-[rgba(255,204,0,0.10)] text-primary shadow-[0px_4px_10px_0px_rgba(0,0,0,0.00)_inset]"
                             : " border-[rgba(31,31,31,0.10)] bg-[rgba(31,31,31,0.10)] text-dark1f"
                           : "border-transparent"
                       }`}
-                  onClick={() => setSelectedTabData(item.amount)} // Function to handle tab change
+                  onClick={() => setSelectedAmount(item.amount)} // Function to handle tab change
                 >
                   {item.amount}
                 </button>
@@ -199,7 +250,7 @@ const PricingPlan = ({ mode }) => {
                 mode === "dark" ? "text-dark121" : "text-white"
               }`}
             >
-              Two-phase, two-step challenge to test your trading skill.
+              {plan?.description}
             </span>
           </div>
           <div
@@ -207,27 +258,7 @@ const PricingPlan = ({ mode }) => {
               mode === "dark" ? "" : "bg-white"
             }`}
           >
-            <div className="flex gap-[10px] items-center justify-between] mb-[10px] max-md:flex-col">
-              {Btmtabs.map((tab) => (
-                <button
-                  key={tab.name}
-                  className={`px-8 py-[10px] h-12 rounded-[100px] flex items-center justify-center transition-all duration-500 ease-in-out
-              font-inter text-sm leading-none font-semibold text-center w-full border 
-              ${mode === "dark" ? "text-ivoryTint" : "text-dark1f"}
-              ${
-                BtmactiveTab === tab.name
-                  ? mode === "dark"
-                    ? "bg-[rgba(255,255,255,0.10)] border-[rgba(255,255,255,0.10)]"
-                    : "bg-[#E9E9E9] border-[rgba(31,31,31,0.10)]"
-                  : "bg-transparent border-transparent"
-              }`}
-                  onClick={() => setBtmActiveTab(tab.name)}
-                >
-                  {tab.name}
-                </button>
-              ))}
-            </div>
-            <PlanCard data={planData} mode={mode} />
+            <PlanCard data={plan?.addons} mode={mode} />
             <span
               className={`mt-6 mb-5 font-inter text-xl text-center block trackling-[-0.2px]
         ${mode === "dark" ? "text-white" : "text-dark1f"}`}

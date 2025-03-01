@@ -9,7 +9,7 @@ import Eyebrow from '../ui/Eyebrow';
 const JoinDiscord = ({ mode }) => {
   useEffect(() => {
     if (window.innerWidth > 1024) {
-      gsap.to(".radial-circle:first-child, .radial-circle:last-child", {
+      gsap.to(".radial-circle", {
         y: "+=30",
         duration: 2,
         repeat: -1,
@@ -17,7 +17,7 @@ const JoinDiscord = ({ mode }) => {
         ease: "power1.inOut",
         stagger: 0.5,
       });
-      gsap.to(".radial-circle:nth-child(2)", {
+      gsap.to(".radial-circle-mid", {
         y: "-=30",
         duration: 3,
         repeat: -1,
@@ -38,7 +38,7 @@ const JoinDiscord = ({ mode }) => {
       <div className="container max-w-[1004px]">
         <div
           className="relative min-h-[768px] flex items-center justify-center
-        max-lg:min-h-[500px] max-md:min-h-[300px]"
+        max-lg:min-h-[500px] max-md:min-h-[350px]"
         >
           <div className="text-center flex items-center flex-col relative z-[4]">
             <img
@@ -75,7 +75,7 @@ const JoinDiscord = ({ mode }) => {
           ></div>
           {/* second circle  */}
           <div
-            className={`radial-circle absolute z-[3] top-[100px] left-0 right-0 mx-auto rounded-full h-[666px] w-[70%] max-w-[666px] opacity-100
+            className={`radial-circle-mid absolute z-[3] top-[100px] left-0 right-0 mx-auto rounded-full h-[666px] w-[70%] max-w-[666px] opacity-100
             ${mode === "dark" ? "shadow-darkRadial bg-black " : "shadow-lightRadial bg-white"}
             max-lg:h-[500px] max-lg:top-10 max-md:hidden max-md:h-[250px] max-lg:w-[70%]`}
           ></div>

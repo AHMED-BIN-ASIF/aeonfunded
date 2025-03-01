@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
 import Eyebrow from "../ui/Eyebrow";
 import Button from "../ui/Button";
 import ArrowRight from "../assets/icons/arrow-right.svg";
 import Target from "../assets/icons/target.svg";
 import Capital from "../assets/icons/safe-box.svg";
 import Paid from "../assets/icons/donate-coin.svg";
-import Dashboard from "../assets/images/dashboard.webp";
+import Dashboard from "../assets/images/challenge-dasboard.webp";
+import DashboardCard from "../assets/images/dashboard-card.webp";
+import DashboardCardLight from "../assets/images/dashboard-card-light.webp";
 import DashboardLight from "../assets/images/dashboard-light.webp";
 
 const aboutCards = [
@@ -32,6 +35,17 @@ const aboutCards = [
 ];
 
 const HowitWorks = ({ mode }) => {
+  const CardRef = useRef(null);
+
+  useEffect(() => {
+    gsap.to(CardRef.current, {
+      y: "-20px",
+      repeat: -1,
+      yoyo: true,
+      duration: 2,
+      ease: "power1.inOut",
+    });
+  }, []);
   return (
     <motion.section
       className="pt-[205px] pb-[120px] max-xl:pt-36 max-xl:pb-20 max-md:py-10"
@@ -67,8 +81,9 @@ const HowitWorks = ({ mode }) => {
               <Button to="/how-it-works" text="Learn More" variant="gold" hasIcon={true} icon={ArrowRight} mode={mode} />
             </div>
           </div>
-          <div>
-            <img src={mode === 'dark' ? Dashboard : DashboardLight} alt="dashboard" loading="lazy" className="w-full -mt-20 max-xl:-mt-16 max-lg:mt-0" />
+          <div className="relative max-lg:mt-14">
+            <img src={mode === 'dark' ? Dashboard : DashboardLight} alt="dashboard" loading="lazy" className="w-full" />
+            <img ref={CardRef} src={mode === 'dark' ? DashboardCard : DashboardCardLight} alt="dashboard" loading="lazy" className={`w-full absolute top-0 -mt-20 max-xl:-mt-14 max-lg:-mt-10 max-md:-mt-6 transition-all duration-200 ease-in-out  ${mode==="dark"? "max-w-[285px] max-lg:max-w-[200px]  right-[2%]": "max-w-[245px] max-lg:max-w-[170px]   right-[8%] max-lg:right-[6%]"}`} />
           </div>
         </motion.div>
         <div className="grid grid-cols-3 gap-6 mt-6 max-lg:grid-cols-2 max-md:grid-cols-1">
