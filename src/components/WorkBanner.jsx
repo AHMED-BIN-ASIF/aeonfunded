@@ -24,7 +24,8 @@ const WorkBanner = ({mode}) => {
             Systems to support your growth, helping you scale up seamlessly with aeonFunded.
             </p>
             <Link
-              to="/"
+              to="http://trading.aeonfunded.com/"
+              target="_blank"
               className="btn bg-white text-[16px] font-inter font-medium leading-none shadow-nav-shadow rounded-[100px] text-black h-10 px-8 py-4 flex items-center justify-center"
             >
               Get Funded
@@ -38,7 +39,7 @@ const WorkBanner = ({mode}) => {
       <div className="absolute inset-0 w-full h-full z-[1]">
         <img src={Texture} alt="texture" loading="lazy" className="w-full h-full" />
       </div>
-      <div className="absolute inset-0 w-full h-full z-[3]">
+      <div className="absolute inset-0 w-full h-full z-[2]">
       <img src={mode==='dark'? BannerGradient:BannerGradientBlack} alt="BannerGradient" loading="lazy" className="w-full h-full object-cover object-bottom " />
       </div>
     </section>

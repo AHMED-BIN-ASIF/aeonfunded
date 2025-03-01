@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Button = ({ to, text, variant = "white", size = "normal", hasIcon = false, icon, mode }) => {
+const Button = ({ to, text, variant = "white", size = "normal", hasIcon = false, icon, mode, target }) => {
   const baseStyles =
     " font-inter font-medium leading-none rounded-full h-10 py-4 flex items-center justify-center gap-2 transition-all ease-in-out duration-500  hover:scale-105";
     const variants = {
@@ -19,7 +19,7 @@ const Button = ({ to, text, variant = "white", size = "normal", hasIcon = false,
   };
 
   return (
-    <Link to={to} className={` ${baseStyles} ${variants[variant]} ${sizes[size]}`}>
+    <Link to={to} target={target} className={` ${baseStyles} ${variants[variant]} ${sizes[size]}`}>
       {text}
       {hasIcon && icon && <img src={icon} alt="icon" loading="lazy" className={`w-[14px] ${variant==='light' || mode==='light' ? 'filter invert' : ''}`} />}
     </Link>

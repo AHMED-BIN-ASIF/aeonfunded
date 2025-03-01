@@ -81,8 +81,8 @@ const Secure = ({ mode }) => {
           </div>
         </div>
         <div className="flex gap-[10px] mt-11 items-center justify-center flex-wrap">
-          <Button to="/" text="Get Funded" mode={mode} />
-          <Button to="/" text="More Payouts" variant="gold" hasIcon={true} icon={ArrowRight} mode={mode} />
+          <Button to="http://trading.aeonfunded.com/" target="_blank" text="Get Funded" mode={mode} />
+          <Button to="http://trading.aeonfunded.com/" target="_blank" text="More Payouts" variant="gold" hasIcon={true} icon={ArrowRight} mode={mode} />
         </div>
       </div>
     </section>

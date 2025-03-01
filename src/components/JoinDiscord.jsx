@@ -38,7 +38,7 @@ const JoinDiscord = ({ mode }) => {
       <div className="container max-w-[1004px]">
         <div
           className="relative min-h-[768px] flex items-center justify-center
-        max-lg:min-h-[500px] max-md:min-h-[350px]"
+        max-lg:min-h-[500px] max-md:min-h-[350px] max-md:items-start"
         >
           <div className="text-center flex items-center flex-col relative z-[4]">
             <img
@@ -52,13 +52,13 @@ const JoinDiscord = ({ mode }) => {
             <Eyebrow text="Discord" />
             <h2
               className={` text-[50px] leading-none font-semibold tracking-[-0.5px]
-                max-lg:text-4xl max-md:text-3xl
+                max-lg:text-4xl max-md:text-2xl
                 ${mode === "dark" ? "text-white" : "text-dark1f"}`}
             >
               Make Waves In Trading
             </h2>
             <p
-              className={`text-sm leading-[1.71] max-w-[644px] mx-auto mt-[10px] mb-[32px] max-lg:mb-6
+              className={`text-sm leading-[1.71] max-w-[644px] mx-auto mt-[10px] mb-[32px] max-lg:mb-6 max-md:text-xs
                   ${mode === "dark" ? "text-ivoryTint" : "text-dark1f"}`}
             >
               Your journey starts here with growth and success.
@@ -91,7 +91,7 @@ const JoinDiscord = ({ mode }) => {
               mode === "dark" ? "opacity-100" : "opacity-0 max-md:opacity-100 filter grayscale invert"
             }`}
           >
-            <img src={JoinBg} alt="join bg" loading="lazy" className="w-full" />
+            <img src={JoinBg} alt="join bg" loading="lazy" className="w-full " />
           </div>
         </div>
       </div>

@@ -103,6 +103,7 @@ const PricingPlan = ({ mode }) => {
   
   return (
     <section
+    id="plans"
       className="py-[120px] bg-cover bg-no-repeat bg-center max-xl:py-20"
       style={{
         background:
