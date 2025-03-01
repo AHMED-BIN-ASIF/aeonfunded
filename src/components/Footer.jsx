@@ -5,6 +5,9 @@ import FooterGradient from '../assets/images/footer-gradient.svg';
 import Line from '../assets/images/line.svg';
 import FooterBrand from '../assets/images/brand.svg';
 import FooterbrandLight from '../assets/images/brand-light.svg';
+import Powered from '../assets/icons/powered.svg';
+import Propicks from '../assets/icons/propicks.svg';
+
 import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebookF, FaYoutube, FaTelegramPlane } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
@@ -66,7 +69,7 @@ const Footer = ({ mode }) => {
                   <a
                     href={nav.path}
                     onClick={(e) => handleNavClick(e, nav.path)}
-                    className={`font-inter opacity-80 p-[10px] ${
+                    className={`font-inter opacity-80 p-[10px] max-md:py-0 ${
                       mode === "dark" ? "text-ivoryTint" : "text-dark1f"
                     }`}
                   >
@@ -83,7 +86,7 @@ const Footer = ({ mode }) => {
                     href={nav.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`font-inter opacity-80 p-[10px] ${
+                    className={`font-inter opacity-80 p-[10px] max-md:py-0  ${
                       mode === "dark" ? "text-ivoryTint" : "text-dark1f"
                     }`}
                   >
@@ -98,7 +101,7 @@ const Footer = ({ mode }) => {
                 <li key={index}>
                   <Link
                     to={nav.path}
-                    className={`font-inter opacity-80 p-[10px] ${
+                    className={`font-inter opacity-80 p-[10px] max-md:py-0 ${
                       mode === "dark" ? "text-ivoryTint" : "text-dark1f"
                     }`}
                   >
@@ -117,7 +120,8 @@ const Footer = ({ mode }) => {
                 href={social.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px] text-2xl max-lg:flex-wrap ${
+                className={`p-3 flex items-center justify-center rounded-full w-[50px] h-[50px] text-2xl max-lg:flex-wrap 
+                  max-md:w-10 max-md:h-10 max-md:p-2 max-md:text-xl ${
                   mode === "dark"
                     ? "text-primary shadow-icon-border bg-[rgba(255,204,0,0.04)]"
                     : "text-dark1f shadow-icon-light bg-[rgba(31,31,31,0.04)]"
@@ -137,6 +141,10 @@ const Footer = ({ mode }) => {
           © 2025 AeonFunded. All rights reserved.
         </span>
       </div>
+        <div className="flex gap-1.5 items-center absolute right-[5%] bottom-[10%] z-10 max-md:relative max-md:mx-auto max-md:mt-2 max-md:justify-center max-md:inset-0">
+          <img src={Powered} alt="powered" className={`max-xl:max-w-[150px] max-lg:max-w-[100px] ${mode==="dark" ? "" :"filter invert"}`} />
+          <img src={Propicks} alt="propicks" className={`max-lg:max-w-[30px]`} />
+        </div>
 
       {/* Footer Backgrounds */}
       <div className={`absolute w-full h-full inset-0 z-[1] ${mode === "dark" ? "" : "opacity-0"}`}>

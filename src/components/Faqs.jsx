@@ -4,24 +4,24 @@ import Eyebrow from "../ui/Eyebrow";
 
 const faqsData = [
   {
-    question: "What do I need to get started?",
+    question: "How much money do I get from the profit?",
     answer:
-      "To get started, you'll need to create an account and choose a plan that suits your needs. Our team is here to help if you have any questions!",
+      "Users are entitled to retain 80% of the performance results achieved on their trader accounts at the end of each business period. The payout can increase up to 95% with optional add-ons, applicable to both Classic and Plus challenges, provided all account Objectives and Rules are met.",
   },
   {
-    question: "What kind of customization is available?",
+    question: "Are There Consistency Rules?",
     answer:
-      "You can customize the design, layout, and content to match your brand. We offer both basic and advanced customization options.",
+      "No, there are no consistency rules.",
   },
   {
-    question: "How easy is it to edit for beginners?",
+    question: "Will I Receive a Refund for My Registration Fee?",
     answer:
-      "Our platform is designed with beginners in mind, offering an intuitive drag-and-drop editor and plenty of guides.",
+      "The registration fee will be refunded after the third consecutive payout from your Aeon Master Account. This adjustment ensures that dedicated traders are rewarded for their commitment and consistent performance. However, keep in mind that the registration fee remains non-refundable under any other circumstances. No refunds or replacement accounts will be provided unless the third payout milestone is reached. All fees are considered final upon registration.",
   },
   {
-    question: "Let me know more about moneyback guarantee?",
+    question: "What platforms are available?",
     answer:
-      "We offer a 30-day money-back guarantee, no questions asked. If you're not satisfied, we’ll make it right!",
+      "We offer TradeLocker and Platform 5, both designed for a smooth trading experience with fast execution and advanced tools. Choose your platform and start your challenge!",
   },
 ];
 
@@ -72,11 +72,11 @@ const Faqs = ({mode}) => {
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className={`w-full flex justify-between items-center  text-left font-inter text-lg leading-none
+                  className={`w-full flex justify-between items-center  text-left font-inter text-lg leading-none max-md:text-sm
                     ${mode==='dark' ? 'text-white' : 'text-dark1f'}`}
                 >
                   <span>{faq.question}</span>
-                  <span className="text-[24px] leading-[0.9] font-light">
+                  <span className="text-[24px] leading-[0.9] font-light ">
                     {activeIndex === index ? "−" : "+"}
                   </span>
                 </button>
@@ -89,7 +89,7 @@ const Faqs = ({mode}) => {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className={`text-sm font-inter pt-2
+                  <div className={`text-sm font-inter pt-2 max-md:text-xs
                     ${mode==='dark'? 'text-ivoryTint':'text-dark1f'}`}>
                     {faq.answer}
                   </div>
