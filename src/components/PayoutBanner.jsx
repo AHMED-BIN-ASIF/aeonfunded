@@ -33,7 +33,7 @@ const payoutCards = [
 const PayoutBanner = ({ mode }) => {
   return (
     <section
-      className="relative pt-[160px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden md:min-h-[calc(100vh-100px)]  flex items-center max-2xl::pt-[120px] max-xl:pt-[100px]"
+      className="relative pt-[120px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden md:min-h-[calc(100vh-100px)]  flex items-center max-2xl::pt-[90px] max-xl:pt-[70px] max-md:pt-12 max-md:pb-12"
       style={{
         background:
           mode === "dark"

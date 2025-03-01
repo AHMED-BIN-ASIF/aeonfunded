@@ -47,7 +47,7 @@ const AboutSection = ({ mode }) => {
               mode === "dark" ? "text-white" : "text-dark1f"
             }`}
           >
-            Why Trade with <span className={`${mode === "dark" ? "text-primary" : "text-dark1f"}`}>A</span>EON?
+            Why Trade with <span><span className={`${mode === "dark" ? "text-primary" : "text-dark1f"}`}>A</span>EON?</span>
           </h2>
           <p
             className={`text-sm leading-[1.71] max-w-[450px] mx-auto mt-[10px] ${

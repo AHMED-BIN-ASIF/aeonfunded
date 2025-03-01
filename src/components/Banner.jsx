@@ -25,7 +25,7 @@ const Banner = ({ mode }) => {
 
   return (
     <section
-      className="relative pt-[100px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden max-md:pt-12"
+      className="relative pt-[100px] pb-[100px] rounded-[0_0_40px_40px] overflow-hidden max-md:pt-12 max-md:pb-12"
       style={{
         background:
           mode === "dark"

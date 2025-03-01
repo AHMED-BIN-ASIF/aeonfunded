@@ -9,7 +9,7 @@ import Eyebrow from "../ui/Eyebrow";
 const WorkBanner = ({mode}) => {
   return (
     <section
-      className="relative bg-black pt-[200px] pb-[200px] rounded-[40px] overflow-hidden max-md:pt-[150px]"
+      className="relative bg-black pt-[200px] pb-[200px] rounded-[40px] overflow-hidden max-md:pt-[50px]"
     >
       <div className="container max-w-[1642px]">
         <div className="grid grid-cols-2 items-center gap-10

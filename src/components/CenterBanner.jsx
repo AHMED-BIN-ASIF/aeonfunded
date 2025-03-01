@@ -7,7 +7,7 @@ import Eyebrow from "../ui/Eyebrow";
 const CenterBanner = ({mode}) => {
   return (
     <section
-      className="relative pt-[100px] pb-[150px] rounded-[0_0_40px_40px] overflow-hidden md:min-h-[calc(100vh-100px)] flex items-center"
+      className="relative pt-[100px] pb-[150px] rounded-[0_0_40px_40px] overflow-hidden md:min-h-[calc(100vh-100px)] flex items-center max-md:pt-12 max-md:pb-12"
       style={{
         background: mode==='dark'
           ? ""
