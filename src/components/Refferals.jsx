@@ -98,7 +98,7 @@ const Refferals = ({ mode }) => {
 
         {/* Referral cards container with staggered animation using inView */}
         <div
-          className="grid grid-cols-3 gap-6 my-6"
+          className="grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-6 my-6"
         >
           {refferData.map((item, index) => (
             <RefferCard key={index} data={item} mode={mode} />
@@ -111,25 +111,25 @@ const Refferals = ({ mode }) => {
           }`}
         >
           <div
-            className={`relative h-full font-inter p-8 rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-8 ${
+            className={`relative h-full font-inter p-8 max-md:p-6 rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-8 ${
               mode === "dark" ? "bg-stats" : "bg-white"
             }`}
             style={{ backdropFilter: "blur(7.5px)" }}
           >
-            <div className="w-full flex justify-between items-center">
+            <div className="w-full flex justify-between items-center flex-wrap">
               <div className="flex items-center gap-4">
                 <img
                   src={Emily}
                   alt="emily"
                   loading="lazy"
-                  className="w-[74px] rounded-[10px]"
+                  className="w-[74px] rounded-[10px] max-md:w-12"
                 />
                 <div>
-                  <span className="text-[16px] block mb-1 leading-tight font-semibold">
+                  <span className="text-[16px] block mb-1 leading-tight font-semibold max-md:text-[14px]">
                     Emily Johnson
                   </span>
                   <span
-                    className={`text-sm block ${
+                    className={`text-sm block max-md:text-xs ${
                       mode === "dark"
                         ? "text-ivoryTint opacity-60"
                         : "text-dark1f"
@@ -140,7 +140,7 @@ const Refferals = ({ mode }) => {
                 </div>
               </div>
               <div className="relative h-8 flex items-center justify-center gap-2 rounded-[100px] py-2.5 px-4 mb-4 border border-solid max-w-max bg-black shadow-nav-shadow border-[rgba(255,255,255,0.20)]">
-                <span className="text-sm font-inter text-[#ECECFB]">
+                <span className="text-sm font-inter text-[#ECECFB] max-md:text-xs">
                   Rising Star
                 </span>
                 <div
