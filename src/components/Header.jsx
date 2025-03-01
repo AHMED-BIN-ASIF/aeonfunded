@@ -1,28 +1,36 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Brand from "../assets/images/brand.svg";
 import BrandLight from "../assets/images/brand-light.svg";
 
 const Header = ({ mode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Challenges", path: "#plans" },
+    { name: "Challenges", path: "/#plans" },
     { name: "How it Works", path: "/how-it-works" },
     { name: "Payouts", path: "/payouts" },
     { name: "Affiliate Program", path: "/affiliate-program" },
     { name: "FAQ", path: "http://Help.Aeonfunded.com", target: "_blank" },
   ];
 
-  // Helper to handle smooth scrolling for hash links
+  // Helper to handle smooth scrolling when a link contains a hash.
   const handleLinkClick = (path) => {
     setMenuOpen(false);
-    if (path.startsWith("#")) {
-      const id = path.slice(1);
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+    const hashIndex = path.indexOf("#");
+    if (hashIndex !== -1) {
+      const hash = path.slice(hashIndex + 1);
+      // If on home page, scroll to the element smoothly.
+      if (location.pathname === "/") {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // If on another page, navigate to home page with the hash.
+        window.location.href = "/#" + hash;
       }
     }
   };
@@ -75,12 +83,13 @@ const Header = ({ mode }) => {
           {/* Main Navigation */}
           <nav
             className={`
-            ${mode === "dark" ? "max-lg:bg-black shadow-nav-shadow" : "max-lg:bg-[#e5e7eb]"}
-            max-w-[666px] rounded-[100px] p-[17px_30px] bg-[rgba(18,18,18,0.10)]
-            max-xl:max-w-[580px] max-xl:p-[14px_24px] max-lg:overflow-hidden 
-            max-lg:absolute top-[80px] left-0 right-0 max-lg:max-w-full max-lg:w-[90%] max-lg:mx-auto
-            max-lg:rounded-lg transition-all ease-in-out duration-500 backdrop:blur-lg z-[20] lg:z-auto  
-            ${menuOpen ? "max-lg:h-auto max-lg:opacity-100" : "max-lg:h-0 max-lg:opacity-0"}`}
+              ${mode === "dark" ? "max-lg:bg-black shadow-nav-shadow" : "max-lg:bg-[#e5e7eb]"}
+              max-w-[666px] rounded-[100px] p-[17px_30px] bg-[rgba(18,18,18,0.10)]
+              max-xl:max-w-[580px] max-xl:p-[14px_24px] max-lg:overflow-hidden 
+              max-lg:absolute top-[80px] left-0 right-0 max-lg:max-w-full max-lg:w-[90%] max-lg:mx-auto
+              max-lg:rounded-lg transition-all ease-in-out duration-500 backdrop:blur-lg z-[20] lg:z-auto  
+              ${menuOpen ? "max-lg:h-auto max-lg:opacity-100" : "max-lg:h-0 max-lg:opacity-0"}
+            `}
           >
             <ul className="flex flex-col lg:flex-row items-center justify-between gap-[30px] max-xl:gap-5">
               {navLinks.map((item, index) => (
@@ -101,6 +110,7 @@ const Header = ({ mode }) => {
             <div className="hidden max-lg:flex max-lg:flex-col mt-4 justify-center lg:flex-row items-center gap-[14px]">
               <Link
                 to="http://trading.aeonfunded.com"
+                target="_blank"
                 className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center
                   ${mode === "dark" ? "bg-[#FFD221] text-black shadow-nav-shadow hover:bg-white hover:text-black" : "bg-black text-white hover:bg-primary hover:text-black"}`}
               >
@@ -108,6 +118,7 @@ const Header = ({ mode }) => {
               </Link>
               <Link
                 to="http://trading.aeonfunded.com"
+                target="_blank"
                 className={`btn font-inter font-medium leading-none rounded-[100px] transition-all duration-300 ease-in-out
                    h-10 px-5 py-4 flex items-center justify-center
                    ${mode === "dark" ? "bg-[rgba(255,255,255,0.10)] text-white shadow-nav-shadow hover:bg-white hover:text-black" : "text-black hover:bg-dark1f hover:text-white"}`}
@@ -119,6 +130,7 @@ const Header = ({ mode }) => {
           <div className="hidden lg:flex flex-col lg:flex-row items-center gap-[14px]">
             <Link
               to="http://trading.aeonfunded.com"
+              target="_blank"
               className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center transition-all duration-300 ease-in-out
               ${mode === "dark" ? "bg-[#FFD221] text-black shadow-nav-shadow hover:bg-white hover:text-black" : "bg-black text-white hover:bg-primary hover:text-black"}`}
             >
@@ -126,6 +138,7 @@ const Header = ({ mode }) => {
             </Link>
             <Link
               to="http://trading.aeonfunded.com"
+              target="_blank"
               className={`btn font-inter font-medium leading-none rounded-[100px] h-10 px-5 py-4 flex items-center justify-center transition-all duration-300 ease-in-out
                 ${mode === "dark" ? "bg-[rgba(255,255,255,0.10)] text-white shadow-nav-shadow hover:bg-white hover:text-black" : "text-black hover:bg-dark1f hover:text-white"}`}
             >

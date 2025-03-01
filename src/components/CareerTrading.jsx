@@ -5,6 +5,25 @@ import Eyebrow from "../ui/Eyebrow";
 import Button from "../ui/Button";
 import CountUp from "react-countup";
 
+// Variants for animation
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: "easeOut" } 
+  },
+};
+
 const CareerTrading = ({ mode }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
 
@@ -20,14 +39,22 @@ const CareerTrading = ({ mode }) => {
       }}
     >
       <div className="container max-w-[1240px]">
-        <div className="grid grid-cols-[.9fr_1fr] gap-20 items-center max-xl:gap-14 max-lg:gap-9 max-lg:grid-cols-1">
-          <div
+        {/* Wrap the two-column grid in a motion.div to stagger child animations */}
+        <motion.div
+          className="grid grid-cols-[.9fr_1fr] gap-20 items-center max-xl:gap-14 max-lg:gap-9 max-lg:grid-cols-1"
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {/* Account Size Card */}
+          <motion.div
             className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset max-md:order-2 ${
               mode === "dark" ? "bg-black" : "bg-[#F1F1F1]"
             }`}
+            variants={fadeInUp}
           >
             <div
-              className={`relative h-full p-8 rounded-[18px] text-center border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-2.5 ${
+              className={`relative h-full p-8 rounded-[18px] text-center border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-2.5 justify-between items-center ${
                 mode === "dark" ? "bg-card-radial" : "bg-white"
               }`}
               style={{ backdropFilter: "blur(7.5px)" }}
@@ -36,7 +63,7 @@ const CareerTrading = ({ mode }) => {
                 <h3 className="text-2xl font-semibold">Account Size</h3>
               </div>
               <div
-                className={`flex justify-between items-center gap-3 p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
+                className={`w-full flex justify-between items-center gap-3 p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
                   mode === "dark" ? "bg-[rgba(5,5,5,0.40)]" : "bg-[#F1F1F1]"
                 }`}
               >
@@ -73,7 +100,7 @@ const CareerTrading = ({ mode }) => {
                 </div>
               </div>
               <div
-                className={`p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
+                className={` w-full p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
                   mode === "dark" ? "bg-[rgba(5,5,5,0.40)]" : "bg-[#F1F1F1]"
                 }`}
               >
@@ -99,21 +126,29 @@ const CareerTrading = ({ mode }) => {
                       mode === "dark" ? "bg-[#fc0]" : "bg-dark1f "
                     }`}
                   >
-                    <div className={`h-2.5 w-2.5 absolute right-0 top-[-2px] rounded-[100px] ${
-                      mode === "dark" ? "bg-[#fc0]" : "bg-dark1f"
-                    }`}></div>
-                    <span className={`absolute right-[-10%] top-[-20px] text-[6px] p-[2px_4px] font-bold rounded-[100px] ${mode === "dark" ? "bg-[#fc0] text-dark1f" : "bg-dark1f text-white"}`}>7.5%</span>
+                    <div
+                      className={`h-2.5 w-2.5 absolute right-0 top-[-2px] rounded-[100px] ${
+                        mode === "dark" ? "bg-[#fc0]" : "bg-dark1f"
+                      }`}
+                    ></div>
+                    <span
+                      className={`absolute right-[-10%] top-[-20px] text-[6px] p-[2px_4px] font-bold rounded-[100px] ${
+                        mode === "dark" ? "bg-[#fc0] text-dark1f" : "bg-dark1f text-white"
+                      }`}
+                    >
+                      7.5%
+                    </span>
                   </motion.div>
                 </div>
               </div>
               <div
-                className={`p-4 rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
+                className={`p-4 w-full rounded-[10px] border border-[rgba(255,255,255,0.10)] ${
                   mode === "dark" ? "bg-[rgba(5,5,5,0.40)]" : "bg-[#F1F1F1]"
                 }`}
               >
                 <span
                   className={`text-sm mb-3 block ${
-                    mode === "dark" ? "text-ivoryTint opacity-60" : "text-dark1f"
+                    mode === "dark" ? "text-ivoryTint opacity-80" : "text-dark1f"
                   }`}
                 >
                   Take Home
@@ -126,8 +161,13 @@ const CareerTrading = ({ mode }) => {
               <div className="absolute top-[-1px] right-0 left-0 mx-auto w-[60%] h-[1px] bg-card-line"></div>
               <div className="absolute bottom-[-1px] left-0 right-0 mx-auto w-[60%] h-[1px] bg-card-line"></div>
             </div>
-          </div>
-          <div className="max-lg:flex max-lg:flex-col max-lg:items-center max-lg:text-center max-md:order-1">
+          </motion.div>
+
+          {/* Text Content */}
+          <motion.div
+            className="max-lg:flex max-lg:flex-col max-lg:items-center max-lg:text-center max-md:order-1"
+            variants={fadeInUp}
+          >
             <Eyebrow
               text="A Full Time Career"
               theme={mode === "dark" ? "white" : "light"}
@@ -148,10 +188,15 @@ const CareerTrading = ({ mode }) => {
               profits
             </p>
             <div className="flex gap-[10px] mt-8 max-lg:justify-center">
-              <Button to="http://trading.aeonfunded.com/" text="Start Trading" mode={mode} target="_blank" />
+              <Button
+                to="http://trading.aeonfunded.com/"
+                text="Start Trading"
+                mode={mode}
+                target="_blank"
+              />
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

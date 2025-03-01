@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "../ui/Eyebrow";
 import BenifitBg from "../assets/images/benifit-bg.svg";
 import Verified from "../assets/icons/shield-warning.png";
@@ -8,6 +9,8 @@ import Clock from "../assets/icons/clock-circle.png";
 import Capita from "../assets/icons/chart-icon.svg";
 import Wallet from "../assets/icons/wallet.svg";
 import Infinity from "../assets/icons/infinity.svg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const benifitsCards = [
   {
@@ -51,35 +54,30 @@ const benifitsCards = [
 
 const Benifits = ({ mode }) => {
   const cardsRef = useRef([]);
+  
   useEffect(() => {
     let ctx = gsap.context(() => {
-      let mm = gsap.matchMedia();
-  
-      mm.add("(min-width: 1024px)", () => { // Animation only for large screens
-        gsap.fromTo(
-          cardsRef.current,
-          { opacity: 0, scale: 0.8, y: 50 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: "top 80%", // Start animation when 80% of the section is in view
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-  
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, scale: 0.8, y: 50 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     }, cardsRef);
   
-    return () => ctx.revert(); // Cleanup on unmount
+    return () => ctx.revert();
   }, []);
-  
   
   return (
     <section
@@ -97,7 +95,7 @@ const Benifits = ({ mode }) => {
               mode === "dark" ? "text-white" : "text-dark1f"
             }`}
           >
-            Why Traders Love <span className={`${mode === "dark" ? "text-primary" : "text-dark1f"}`}>A</span>EON?
+            Why Traders Love <span><span className={`${mode === "dark" ? "text-primary" : "text-dark1f"}`}>A</span>EON?</span>
           </h2>
           <p
             className={`text-sm leading-[1.71] max-w-[350px] mx-auto mt-[10px] ${
@@ -112,15 +110,13 @@ const Benifits = ({ mode }) => {
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset 
-               
-                ${
-                mode === "dark" ? "bg-black " : "bg-[#F1F1F1] "
+              className={`p-[10px] rounded-[24px] border border-solid border-[rgba(255,255,255,0.06)] shadow-card-inset ${
+                mode === "dark" ? "bg-black" : "bg-[#F1F1F1]"
               }`}
             >
               <div
                 className={`relative p-6 h-full rounded-[18px] border border-solid border-[rgba(255,255,255,0.10)] flex flex-col gap-5 justify-between items-start ${
-                  mode === "dark" ? " bg-card-gradient" : "bg-white"
+                  mode === "dark" ? "bg-card-gradient" : "bg-white"
                 }`}
               >
                 <div>
@@ -134,14 +130,14 @@ const Benifits = ({ mode }) => {
                     >
                       <img src={card.icon} alt={card.title} className={`${mode === "dark" ? "" : "filter invert"}`} />
                     </div>
-                    <h4 className={`text-xl leading-tight font-semibold font-inter ${mode === "dark" ? "text-white " : "text-dark1f"}`}>
+                    <h4 className={`text-xl leading-tight font-semibold font-inter ${mode === "dark" ? "text-white" : "text-dark1f"}`}>
                       {card.title}
                     </h4>
                   </div>
-                  <span className={`text-sm leading-loose font-inter mb-1 ${mode === "dark" ? "text-white " : "text-dark1f"}`}>
+                  <span className={`text-sm leading-loose font-inter mb-1 ${mode === "dark" ? "text-white" : "text-dark1f"}`}>
                     {card.shortTitle}
                   </span>
-                  <p className={`text-xs leading-[1.7] font-inter ${mode === "dark" ? "text-ivoryTint " : "text-dark1f"}`}>
+                  <p className={`text-xs leading-[1.7] font-inter ${mode === "dark" ? "text-ivoryTint" : "text-dark1f"}`}>
                     {card.description}
                   </p>
                 </div>

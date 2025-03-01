@@ -22,10 +22,10 @@ const socialLinks = [
 
 const navLinks = [
   { name: 'Home', path: '/' },
-  { name: 'Challenges', path: '#plans' },
+  { name: 'Challenges', path: '/#plans' },
   { name: 'How It Works', path: '/how-it-works' },
   { name: 'Affiliate Program', path: '/affiliate-program' },
-  { name: 'FAQ', path: 'http://Help.Aeonfunded.com' },
+  { name: 'FAQ', path: 'http://Help.Aeonfunded.com' , target: '_blank' },
 ];
 
 const Footer = ({ mode }) => {
@@ -61,57 +61,21 @@ const Footer = ({ mode }) => {
         </div>
 
         <ul className="flex items-center mt-10 mb-8 gap-[10px] justify-center max-md:flex-col">
-          {navLinks.map((nav, index) => {
-            // For hash links, use an <a> tag with onClick to trigger smooth scroll
-            if (nav.path.startsWith("#")) {
-              return (
-                <li key={index}>
-                  <a
-                    href={nav.path}
-                    onClick={(e) => handleNavClick(e, nav.path)}
-                    className={`font-inter opacity-80 p-[10px] max-md:py-0 ${
-                      mode === "dark" ? "text-ivoryTint" : "text-dark1f"
-                    }`}
-                  >
-                    {nav.name}
-                  </a>
-                </li>
-              );
-            }
-            // For external links, use an <a> tag with target attributes
-            else if (nav.path.startsWith("http")) {
-              return (
-                <li key={index}>
-                  <a
-                    href={nav.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`font-inter opacity-80 p-[10px] max-md:py-0  ${
-                      mode === "dark" ? "text-ivoryTint" : "text-dark1f"
-                    }`}
-                  >
-                    {nav.name}
-                  </a>
-                </li>
-              );
-            }
-            // For internal links, use the React Router Link component
-            else {
-              return (
-                <li key={index}>
-                  <Link
-                    to={nav.path}
-                    className={`font-inter opacity-80 p-[10px] max-md:py-0 ${
-                      mode === "dark" ? "text-ivoryTint" : "text-dark1f"
-                    }`}
-                  >
-                    {nav.name}
-                  </Link>
-                </li>
-              );
-            }
-          })}
-        </ul>
+  {navLinks.map((nav, index) => (
+    <li key={index}>
+      <Link
+        to={nav.path}
+        target={nav.target}
+        onClick={(e) => handleNavClick(e, nav.path)}
+        className={`font-inter opacity-80 p-[10px] max-md:py-0 ${
+          mode === "dark" ? "text-ivoryTint" : "text-dark1f"
+        }`}
+      >
+        {nav.name}
+      </Link>
+    </li>
+  ))}
+</ul>
 
         <ul className="flex items-center gap-4 justify-center mb-7">
           {socialLinks.map((social, index) => (

@@ -9,9 +9,9 @@ const faqsData = [
       "Users are entitled to retain 80% of the performance results achieved on their trader accounts at the end of each business period. The payout can increase up to 95% with optional add-ons, applicable to both Classic and Plus challenges, provided all account Objectives and Rules are met.",
   },
   {
-    question: "Are There Consistency Rules?",
+    question: "Can I have more than one account on Aeon Funded?",
     answer:
-      "No, there are no consistency rules.",
+      "No, you are allowed to have only one login account for accessing the dashboard and managing your profile, creating multiple login accounts is prohibited and may lead to account suspension or termination. However, when it comes to trading accounts, there is no limit on the number of accounts you can have as long as they are part of different challenge phases. You can combine Funded trading accounts to reach a maximum capital allocation of $400,000, using one or more accounts. Please make sure to follow the guidelines and terms for each challenge phase to avoid any issues.",
   },
   {
     question: "Will I Receive a Refund for My Registration Fee?",

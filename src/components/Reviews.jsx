@@ -11,53 +11,86 @@ import ReviewGradient from "../assets/images/review-gradient.svg";
 const reviewCards = [
   {
     img: John,
-    description: "They not only delivered a top-notch website but also provided strategic insights that helped us improve our overall digital presence.",
-    name: "Alice Johnson",
-    designation: "Marketing Director",
-    company: "Bright Future Tech",
+    description: "I've been trading with Aeon for the past few months, and I must say, the experience has been top-tier! The evaluation process is fair, the platform is smooth, and the customer support is always helpful. Payouts are quick, and the 95% profit split is unbeatable. Highly recommend to serious traders!",
+    name: "James Carter",
+    designation: "Funded Trader",
+    company: "Independent Trader",
     stars: 5,
   },
   {
     img: John,
-    description: "Their team was highly professional and guided us through every step of the development process seamlessly.",
-    name: "Michael Brown",
-    designation: "Founder",
-    company: "NextGen Startups",
-    stars: 4,
-  },
-  {
-    img: John,
-    description: "The level of expertise and commitment they brought to the project made a significant impact on our business.",
-    name: "Emma Davis",
-    designation: "COO",
-    company: "Elevate Solutions",
+    description: "Aeon truly understands traders! The rules are straightforward, the profit split is great, and there are no hidden fees. The evaluation phase is challenging but fair, and once you get funded, it's a game-changer. This is the best prop firm I’ve worked with so far!",
+    name: "Olivia Reynolds",
+    designation: "Funded Trader",
+    company: "Independent Trader",
     stars: 5,
   },
   {
     img: John,
-    description: "We were impressed by their innovative approach and ability to deliver beyond expectations every time.",
-    name: "David Wilson",
-    designation: "Product Manager",
-    company: "Streamline Inc.",
-    stars: 4,
-  },
-  {
-    img: John,
-    description: "Their team’s creativity and strategic input were invaluable in refining our digital presence and outreach.",
-    name: "Sophia Martinez",
-    designation: "Creative Director",
-    company: "Visionary Designs",
+    description: "I was skeptical about prop firms, but Aeon changed my mind. They are transparent with payouts, offer excellent trading conditions, and actually support their traders. I received my first payout without any delays, and I’m looking forward to scaling my account with them!",
+    name: "Ethan Mitchell",
+    designation: "Funded Trader",
+    company: "Independent Trader",
     stars: 5,
   },
   {
     img: John,
-    description: "An outstanding experience! They transformed our ideas into a beautifully crafted digital solution.",
-    name: "James Anderson",
-    designation: "CTO",
-    company: "Tech Pioneer",
-    stars: 4,
+    description: "I trade both futures and forex, and Aeon offers one of the best platforms for both markets. Their execution speed is fast, spreads are low, and they allow flexibility with strategies. It’s clear that Aeon is designed for real traders, not just for making money off fees like some other firms!",
+    name: "Sophia Bennett",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "Aeon delivers exactly what they promise. The rules are clear, payouts are smooth, and the evaluation process is realistic and achievable. I’ve tried other firms before, but Aeon actually supports traders for long-term success. Definitely my top choice!",
+    name: "Daniel Cooper",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "The team at Aeon actually listens to their traders and makes improvements based on feedback. I had a few questions about scaling, and the support team was super helpful. Their risk management system is fair, and they actually want you to succeed. If you're serious about trading, this is the firm for you!",
+    name: "Ava Sullivan",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "I just received my first payout from Aeon, and it was processed within 24 hours! No shady delays, no unnecessary restrictions—just straightforward trading. I highly recommend them to anyone looking for a real prop firm!",
+    name: "Michael Hayes",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "I’ve traded with multiple prop firms, but Aeon stands out. Their trading conditions are better than most firms, and they actually have a clear and achievable evaluation process. It’s refreshing to see a firm that actually helps traders instead of just profiting off failed challenges!",
+    name: "Emma Lawson",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "Aeon’s evaluation phase is fair and structured, allowing skilled traders to get funded without ridiculous restrictions. I had a minor issue during the challenge, but their support team was quick to help and resolved it in no time. I love the transparency and professionalism!",
+    name: "Liam Parker",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
+  },
+  {
+    img: John,
+    description: "Aeon is one of the few prop firms that actually operates with integrity. The profit split is great, the payouts are consistent, and there are no hidden rules to mess you up. If you're looking for a reliable firm, Aeon is the way to go!",
+    name: "Charlotte Brooks",
+    designation: "Funded Trader",
+    company: "Independent Trader",
+    stars: 5,
   },
 ];
+
 
 const sliderSettings = {
   vertical: true,
@@ -102,7 +135,7 @@ const Reviews = ({ mode }) => {
             {/* 2nd slider (Reversed & Rotated) */}
             <div className="rotate-180">
               <Slider {...sliderSettings}>
-                {reviewCards.slice(2, 6).reverse().map((card, index) => (
+                {reviewCards.slice(4, 8).reverse().map((card, index) => (
                   <div key={index} className="rotate-180">
                     <ReviewCard card={card} mode={mode} />
                   </div>
@@ -112,7 +145,7 @@ const Reviews = ({ mode }) => {
 
             {/* 3rd slider */}
             <Slider {...sliderSettings}>
-              {reviewCards.slice(0, 4).map((card, index) => (
+              {reviewCards.slice(5, 10).map((card, index) => (
                 <ReviewCard key={index} card={card} mode={mode} />
               ))}
             </Slider>
@@ -173,7 +206,7 @@ const ReviewCard = ({ card, mode }) => {
         <div>
           <div className="flex gap-[6px] mb-5">
             {[...Array(card.stars)].map((_, i) => (
-              <img key={i} src={Star} alt="star" loading="lazy" className="w-5 h-5" />
+              <img key={i} src={Star} alt="star" loading="lazy" className={`w-5 h-5 ${mode==="dark"? "":"filter -hue-rotate-15"}`} />
             ))}
           </div>
           <p className={`text-sm leading-loose font-inter ${mode === "dark" ? "text-ivoryTint" : "text-dark1f"}`}>
@@ -181,7 +214,7 @@ const ReviewCard = ({ card, mode }) => {
           </p>
           <div className="pt-5 mt-5 border-t border-solid border-[rgba(255,255,255,0.10)]">
             <span className={`font-inter text-base leading-relaxed ${mode === "dark" ? "text-ivoryTint" : "text-dark1f opacity-80"}`}>
-              {card.company}
+              {card.name}
             </span>
           </div>
         </div>
